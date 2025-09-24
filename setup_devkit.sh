@@ -18,6 +18,18 @@ sudo apt update && sudo apt -y upgrade
 sudo apt -y install software-properties-common apt-transport-https curl wget git unzip build-essential gnupg lsb-release ca-certificates htop net-tools ufw
 
 # ----------------------------
+# Broadcom Wi-Fi (for MacBook Air 6,1)
+# ----------------------------
+echo "📶 Installing Broadcom Wi-Fi driver..."
+sudo apt -y install bcmwl-kernel-source
+
+# ----------------------------
+# Bluetooth tethering tools
+# ----------------------------
+echo "🔵 Installing Bluetooth utilities..."
+sudo apt -y install blueman bluez bluez-tools rfkill
+
+# ----------------------------
 # Expand Swapfile to 8GB
 # ----------------------------
 echo "⚡ Configuring swapfile..."
