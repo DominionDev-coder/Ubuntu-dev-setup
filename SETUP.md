@@ -9,6 +9,9 @@ After you have installed Linux Mint onto your SSD and completed the basic setup 
 2. Log in to Linux Mint.
 3. Connect to Wi-Fi or Ethernet.
 
+   - If Wi-Fi does not show: the setup script will install **Broadcom drivers** (`bcmwl-kernel-source`).
+   - You can also tether via **Bluetooth** if Wi-Fi fails (tools are preinstalled: `blueman`, `bluez`).
+
 ---
 
 ## 2. Run the Setup Script
@@ -29,7 +32,7 @@ After you have installed Linux Mint onto your SSD and completed the basic setup 
 ---
 
 ## 3. What the Script Does
-- Expands swapfile to **8GB**
+- Configures an **8GB swapfile**
 - Installs dev tools:
   - **Python** + pip, venv, Jupyter
   - **Anaconda** (with data science & AI libs: PyTorch, TensorFlow, scikit-learn, Pandas, Kaggle, etc.)
@@ -41,6 +44,8 @@ After you have installed Linux Mint onto your SSD and completed the basic setup 
   - **Networking tools**: iperf3, traceroute, nethogs
   - **Security tools**: ufw, fail2ban, ClamAV
   - **Packaging tools**: rpm, alien, dpkg-dev, fakeroot, lintian
+- Installs **Broadcom Wi-Fi drivers** for MacBook Air
+- Installs **Bluetooth tethering tools**
 - Cleans unused packages
 
 ---
@@ -72,4 +77,4 @@ ngrok version
 
 ---
 
-## ✅ Your SSD is now a portable, full-featured DevKit OS.
+## ✅ Your SSD is now a portable, full-featured DevKit OS with Wi-Fi + Bluetooth support.
