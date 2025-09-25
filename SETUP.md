@@ -1,80 +1,68 @@
-# 🚀 Post-Installation Guide: Linux Mint DevKit on SSD
+# Fedora SSD DevKit Post-Installation Guide
 
-After you have installed Linux Mint onto your SSD and completed the basic setup (username, password, language, etc.), follow these steps to prepare your DevKit system.
-
----
-
-## 1. First Boot
-1. Boot into your SSD (hold **Option ⌥** on Mac and choose the SSD).
-2. Log in to Linux Mint.
-3. Connect to Wi-Fi or Ethernet.
-
-   - If Wi-Fi does not show: the setup script will install **Broadcom drivers** (`bcmwl-kernel-source`).
-   - You can also tether via **Bluetooth** if Wi-Fi fails (tools are preinstalled: `blueman`, `bluez`).
-
----
-
-## 2. Run the Setup Script
-1. Copy `setup_devkit.sh` into your Linux Mint home folder.  
-   - If you uploaded it to GitHub:  
-     ```bash
-     git clone <your-repo-url>
-     cd <repo>
-     ```
-   - Or copy from USB.
-
-2. Make it executable and run:
-   ```bash
-   chmod +x setup_devkit.sh
-   ./setup_devkit.sh
-   ```
-
----
-
-## 3. What the Script Does
-- Configures an **8GB swapfile**
-- Installs dev tools:
-  - **Python** + pip, venv, Jupyter
-  - **Anaconda** (with data science & AI libs: PyTorch, TensorFlow, scikit-learn, Pandas, Kaggle, etc.)
-  - **Node.js, npm, TypeScript, Yarn**
-  - **Dart & Flutter**
-  - **Pulumi**
-  - **Windsurf IDE**
-  - **Tunneling tools**: ngrok, localtunnel
-  - **Networking tools**: iperf3, traceroute, nethogs
-  - **Security tools**: ufw, fail2ban, ClamAV
-  - **Packaging tools**: rpm, alien, dpkg-dev, fakeroot, lintian
-- Installs **Broadcom Wi-Fi drivers** for MacBook Air
-- Installs **Bluetooth tethering tools**
-- Cleans unused packages
-
----
-
-## 4. Verify Installation
-Check tools after setup:
-
-```bash
-python3 --version
-conda --version
-node -v
-tsc -v
-flutter doctor
-pulumi version
-ngrok version
-```
-
----
-
-## 5. Maintenance
-- Update your system regularly:
+## 1. Anaconda & AI Environment
+- Activate AI environment:
   ```bash
-  sudo apt update && sudo apt upgrade -y
+  conda activate ai
   ```
-- Clean junk:
+- Deactivate:
   ```bash
-  sudo apt autoremove && sudo apt clean
+  conda deactivate
+  ```
+- Update packages:
+  ```bash
+  conda update --all -n ai
   ```
 
----
+## 2. Docker Development
+- Start Docker service:
+  ```bash
+  sudo systemctl start docker
+  ```
+- Run databases:
+  ```bash
+  docker run -d --name pg -e POSTGRES_PASSWORD=dev -p 5432:5432 postgres
+  docker run -d --name mongo -p 27017:27017 mongo
+  docker run -d --name redis -p 6379:6379 redis
+  ```
 
-## ✅ Your SSD is now a portable, full-featured DevKit OS with Wi-Fi + Bluetooth support.
+## 3. Tunneling (expose localhost)
+- Ngrok:
+  ```bash
+  ngrok http 8000
+  ```
+- LocalTunnel:
+  ```bash
+  lt --port 8000
+  ```
+
+## 4. Updating Tools
+- Fedora system:
+  ```bash
+  sudo dnf upgrade --refresh
+  ```
+- Node.js packages:
+  ```bash
+  npm update -g
+  ```
+- Python (system):
+  ```bash
+  pip install --upgrade pip setuptools wheel
+  ```
+
+## 5. Networking & Drivers
+- Manage Wi-Fi: use **network manager applet** in tray.  
+- Bluetooth manager: run `blueman-manager`.  
+- Broadcom Wi-Fi: handled by `broadcom-wl`.  
+
+## 6. Notes
+- Swap: Fedora auto-manages a swapfile; no manual setup needed.  
+- Pulumi is installed in `$HOME/.pulumi/bin`.  
+- Warp installed via Flatpak: launch via menu or `warp`.  
+
+---
+✨ This Fedora SSD DevKit is optimized for:  
+- General software development (Python, Java, Node.js, Dart/Flutter, Go, Rust, .NET)  
+- AI/ML/Data science (Anaconda environment `ai`)  
+- Cloud & DevOps (Docker, Pulumi, tunneling tools)  
+- Git & collaboration (GitHub Desktop, GitKraken, Warp)  
